@@ -1,0 +1,23 @@
+default_decision: "ALLOW_WITH_AUDIT"
+approval_ttl_minutes: 30
+
+# Hard block. These paths cannot be unlocked by approval.
+blocked_paths:
+  - ".env"
+  - ".env.*"
+  - "**/*secret*"
+  - "**/*iam*.json"
+
+# Require human approval before commit/push.
+approval_required_paths:
+  - ".github/workflows/**"
+  - "terraform/**"
+  - "infra/**"
+  - "Dockerfile"
+  - "docker-compose.yml"
+  - "src/auth/**"
+
+secret_detection:
+  enabled: true
+  engine: "builtin"
+  decision: "BLOCK"

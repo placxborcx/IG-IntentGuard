@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "intentguard"
+version = "0.1.0"
+description = "Local-first security guard for autonomous AI coding agents"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "IntentGuard Team"}
+]
+license = "MIT"
+dependencies = [
+    "pydantic>=2.0",
+    "PyYAML>=6.0",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+intentguard = "intentguard.cli:app"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.setuptools.packages.find]
+include = ["intentguard*"]
+
+[tool.setuptools.package-data]
+intentguard = ["policies/*.yaml"]
