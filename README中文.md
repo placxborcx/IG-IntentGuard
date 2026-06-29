@@ -2,29 +2,23 @@
 
 > 為 AI 輔助開發工作流設計的 local-first 安全檢查工具。
 
-IntentGuard 的目標是讓 AI coding agents 可以加速開發，但不被無限制信任。它會掃描 Git diff，依照本機 policy 做出 deterministic security decisions，阻擋特定敏感變更，對高風險工程路徑要求人工 approval，並寫入本機 audit log。
+IntentGuard 的目標是讓 AI coding agents 可以加速開發，但不被無限制信任。
+它會掃描 Git diff，依照本機 policy 做出 deterministic security decisions，阻擋特定敏感變更，對高風險工程路徑要求人工 approval，並寫入本機 audit log。
 
-這個 repository 是 **MVP1a public preview**：以 CLI 為主、local-only、聚焦 Git diff scanning 和 pre-commit protection。
+這個repository是 **MVP1a public preview**：以 CLI 為主、local-only、聚焦 Git diff scanning 和 pre-commit protection。
 
 ## 團隊
-
-IntentGuard 是兩個人合作的 project：
-
 - **SWE:** Sylvia
 - **Security:** Mike
-
-這個 project 刻意把 developer experience 和 security decision design 分開負責。
 
 ## 為什麼需要 IntentGuard
 
 Claude Code、Codex、Cursor、Copilot Agent 這類 AI coding agents 已經可以修改檔案、安裝套件、開 PR，甚至觸發 workflow。這很有用，但也帶來一個問題：
-
 > 如何讓 AI agents 幫忙寫程式，但不預設信任它們修改的每一個檔案？
 
-IntentGuard 站在 AI 產生的變更和 Git history 之間。MVP1a 不嘗試判斷變更到底是人類還是 AI 產生，而是把所有 Git working tree changes 都視為 untrusted，並套用本機 policy 檢查。
+IntentGuard 站在 AI 產生的變更和 Git history 之間。MVP1a 不嘗試判斷變更到底是人類還是 AI 產生，而是把所有 Git working tree changes 都視為 untrusted (Zero-Trust)，並套用本機 policy 檢查。
 
 ## MVP1a 目前可以做什麼
-
 - 初始化本機 `.intentguard/` policy 和 runtime files。
 - 用手動 allowed paths 建立 task boundary。
 - 掃描 staged 或 unstaged Git diffs。
@@ -36,7 +30,6 @@ IntentGuard 站在 AI 產生的變更和 Git history 之間。MVP1a 不嘗試判
 - 安裝 pre-commit hook，在 commit 前 enforce staged scan decisions。
 
 ## 快速開始
-
 需要 Python 3.11 或更新版本。
 
 ```bash
